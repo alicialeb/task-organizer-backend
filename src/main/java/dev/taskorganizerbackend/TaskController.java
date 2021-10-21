@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins="http://localhost:8081")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class TaskController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/taks/{id}")
+    @GetMapping("/tasks/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable("id") long id) {
         Optional<Task> taskData = taskRepository.findById(id);
 
