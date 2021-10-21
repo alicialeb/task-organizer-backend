@@ -26,13 +26,17 @@ public class Task {
     private String description;
 
     @Column(name = "status")
-    @Getter
     @Setter
+    @Getter
     private boolean status;
 
     public Task(String title, String description, boolean status ){
         this.title = title;
         this.description = description;
         this.status = status;
+    }
+
+    public Task() {
+
     }
 }
