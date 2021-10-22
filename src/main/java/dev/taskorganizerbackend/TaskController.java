@@ -11,16 +11,16 @@ import java.util.Optional;
 
 @CrossOrigin(origins="http://localhost:8081")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/")
 public class TaskController {
 
     @Autowired
     TaskRepository taskRepository;
 
-    @GetMapping("/tasks/")
+    @GetMapping("/tasks")
     public ResponseEntity<List<Task>> getAllTasks(@RequestParam(required = false) String title) {
         try {
-            List<Task> tasks = new ArrayList<>();
+            List<Task> tasks = new ArrayList<Task>();
 
             if (title == null) {
                 tasks.addAll(taskRepository.findAll());
@@ -47,8 +47,8 @@ public class TaskController {
     @PostMapping("/tasks")
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         try {
-            Task _task = taskRepository.save(new Task (task.getTitle(), task.getDescription(), false));
-            return new ResponseEntity<>(_task, HttpStatus.CREATED);
+            Task t = taskRepository.save(new Task (task.getTitle(), task.getDescription(), false));
+            return new ResponseEntity<>(t, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -73,7 +73,7 @@ public class TaskController {
     public ResponseEntity<HttpStatus> deleteTask(@PathVariable("id") long id) {
         try {
             taskRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

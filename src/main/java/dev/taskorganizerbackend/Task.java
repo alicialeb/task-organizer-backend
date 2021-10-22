@@ -13,6 +13,8 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
+    @Setter
     private long id;
 
     @Column(name = "title")
@@ -30,7 +32,7 @@ public class Task {
     @Getter
     private boolean status;
 
-    public Task(String title, String description, boolean status ){
+    public Task(String title, String description, boolean status){
         this.title = title;
         this.description = description;
         this.status = status;
